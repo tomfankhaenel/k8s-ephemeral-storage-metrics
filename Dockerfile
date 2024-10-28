@@ -17,7 +17,7 @@ RUN go mod download
 
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -a -o app ./cmd/app/main.go
 
-FROM --platform=${BUILDPLATFORM:-linux/amd64} gcr.io/distroless/static:nonroot
+FROM --platform=${BUILDPLATFORM:-linux/amd64} alpine:3.20
 LABEL org.opencontainers.image.source="https://github.com/jmcgrath207/k8s-ephemeral-storage-metrics"
 WORKDIR /
 COPY --from=builder /code/app .
